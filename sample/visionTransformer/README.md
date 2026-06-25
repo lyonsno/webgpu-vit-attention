@@ -46,5 +46,5 @@ python tools/convert_deit_weights.py
 
 ## License
 
-Sample code: BSD-3-Clause (matching webgpu-samples).
+Sample code: BSD-3-Clause.
 Model weights: Apache-2.0 (Meta DeiT). See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).

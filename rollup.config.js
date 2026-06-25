@@ -1,5 +1,3 @@
-import fs from 'fs';
-import path from 'path';
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 import typescript from '@rollup/plugin-typescript';
 import commonjs from '@rollup/plugin-commonjs';
@@ -27,61 +25,6 @@ function wgslPlugin() {
   };
 }
 
-function makeRelativeToCWD(id) {
-  return path.relative(process.cwd(), path.normalize(id)).replaceAll('\\', '/');
-}
-
-function filenamePlugin() {
-  return {
-    name: 'filename-plugin',
-    transform(code, id) {
-      return {
-        code: code.replaceAll(
-          '__DIRNAME__',
-          () => `${JSON.stringify(makeRelativeToCWD(path.dirname(id)))}`
-        ),
-        map: { mappings: '' },
-      };
-    },
-  };
-}
-
-/**
- * Given a path like sample/foo/main.ts then, if an index.html doesn't exist
- * in the same folder, generate a redirect index.html in the out folder.
- * Note:
- *    `samples/name/index.html` is a redirect (generated)
- *    `sample/name/index.html` is the live sample (the iframe's src)
- */
-function writeRedirect(filename) {
-  const sampleName = path.basename(path.dirname(filename));
-  const dirname = path.join(outPath, 'samples', sampleName);
-  const filepath = path.join(dirname, 'index.html');
-  fs.mkdirSync(dirname, { recursive: true });
-  console.log('created', filepath);
-  fs.writeFileSync(
-    filepath,
-    `\
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-      <meta
-        http-equiv="refresh"
-        content="0;URL='../../?sample=${path.basename(path.dirname(filename))}'"
-      ></meta> 
-  </head>
-</html>
-`
-  );
-}
-
-const sampleFiles = readDirSyncRecursive('sample');
-
-// Generate redirects for all samples
-sampleFiles
-  .filter((n) => n.endsWith('/index.html'))
-  .forEach((n) => writeRedirect(n));
-
 const samplePlugins = [
   wgslPlugin(),
   nodeResolve(),
@@ -89,9 +32,10 @@ const samplePlugins = [
   typescript({ tsconfig: './sample/tsconfig.json' }),
 ];
 
-// add a rollup rule for each sample
+const sampleFiles = readDirSyncRecursive('sample');
+
 const samples = sampleFiles
-  .filter((n) => n.endsWith('/main.ts') || n.endsWith('/worker.ts'))
+  .filter((n) => n.endsWith('/main.ts'))
   .map((filename) => {
     return {
       input: filename,
