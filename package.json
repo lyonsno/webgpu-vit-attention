@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Vision Transformer (DeiT-Tiny) inference in WebGPU compute shaders with attention visualization",
   "license": "BSD-3-Clause",
-  "private": false,
+  "private": true,
   "type": "module",
   "repository": {
     "type": "git",
