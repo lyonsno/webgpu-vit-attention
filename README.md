@@ -32,8 +32,6 @@ python tools/convert_deit_weights.py
 
 | File | Description |
 |------|-------------|
-| File | Description |
-|------|-------------|
 | `sample/visionTransformer/main.ts` | UI, image loading, WebGPU setup |
 | `sample/visionTransformer/inference.ts` | Forward pass orchestration |
 | `sample/visionTransformer/weights.ts` | Binary weight loader with int8 dequantization |
