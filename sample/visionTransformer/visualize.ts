@@ -80,7 +80,7 @@ export class AttentionVisualizer {
   uploadImage(rgbaData: Uint8ClampedArray, width: number, height: number) {
     this.device.queue.writeTexture(
       { texture: this.imageTexture },
-      rgbaData,
+      rgbaData as unknown as ArrayBuffer,
       { bytesPerRow: width * 4, rowsPerImage: height },
       { width, height }
     );

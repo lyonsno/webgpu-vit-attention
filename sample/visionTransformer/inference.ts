@@ -296,7 +296,11 @@ export class VitInference {
   }
 
   uploadImage(imageData: Float32Array) {
-    this.device.queue.writeBuffer(this.imageBuffer, 0, imageData);
+    this.device.queue.writeBuffer(
+      this.imageBuffer,
+      0,
+      imageData as unknown as ArrayBuffer
+    );
   }
 
   /**
