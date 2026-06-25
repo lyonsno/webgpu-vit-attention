@@ -12,7 +12,9 @@
   "scripts": {
     "build": "node build/tools/build.js",
     "serve": "node build/tools/serve.js",
-    "start": "node build/tools/serve.js"
+    "start": "node build/tools/serve.js",
+    "watch": "rollup -c -w",
+    "server": "servez --no-unity-hack out"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^25.0.8",

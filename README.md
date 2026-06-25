@@ -16,7 +16,7 @@ Runs a DeiT-Tiny vision transformer (5.7M params) entirely in WebGPU compute sha
 ```bash
 npm install
 npm run serve
-# Open http://localhost:8080/?sample=visionTransformer
+# Open http://localhost:8080/sample/visionTransformer/
 ```
 
 ## Model weights
