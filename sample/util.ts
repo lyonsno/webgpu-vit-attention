@@ -2,11 +2,11 @@
 // This gets set up on all pages that include util.ts.
 globalThis.addEventListener('unhandledrejection', (ev) => {
   fail(`unhandled promise rejection, please report a bug!
-  https://github.com/webgpu/webgpu-samples/issues/new\n${ev.reason}`);
+  https://github.com/lyonsno/webgpu-vit-attention/issues/new\n${ev.reason}`);
 });
 globalThis.addEventListener('error', (ev) => {
   fail(`uncaught exception, please report a bug!
-  https://github.com/webgpu/webgpu-samples/issues/new\n${ev.error}`);
+  https://github.com/lyonsno/webgpu-vit-attention/issues/new\n${ev.error}`);
 });
 
 /** Shows an error dialog if getting an adapter wasn't successful. */
