@@ -135,16 +135,20 @@ async function classifyImage(img: HTMLImageElement | HTMLCanvasElement) {
     const { logits, attnWeights, elapsedMs } = await inference.run();
     currentAttnWeights = attnWeights;
 
-    // Display results
+    // Display results using textContent (safe against unexpected label content)
     const predictions = topK(logits, labels, 5);
-    resultsDiv.innerHTML = predictions
-      .map(
-        (p) =>
-          `<div class="prediction"><span>${p.label}</span><span class="prob">${(
-            p.probability * 100
-          ).toFixed(1)}%</span></div>`
-      )
-      .join('');
+    resultsDiv.replaceChildren();
+    for (const p of predictions) {
+      const row = document.createElement('div');
+      row.className = 'prediction';
+      const labelSpan = document.createElement('span');
+      labelSpan.textContent = p.label;
+      const probSpan = document.createElement('span');
+      probSpan.className = 'prob';
+      probSpan.textContent = `${(p.probability * 100).toFixed(1)}%`;
+      row.append(labelSpan, probSpan);
+      resultsDiv.appendChild(row);
+    }
 
     statusDiv.textContent = `Inference: ${elapsedMs.toFixed(0)}ms`;
 
