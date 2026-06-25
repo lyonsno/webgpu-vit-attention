@@ -2,7 +2,7 @@
 
 Runs a DeiT-Tiny vision transformer (5.7M params) entirely in WebGPU compute shaders to classify images, and visualizes per-head attention maps as interactive heatmap overlays.
 
-**[Live demo](https://lyonsno.github.io/webgpu-samples/)**
+**[Live demo](https://lyonsno.github.io/webgpu-vit-attention/)**
 
 ## What it does
 

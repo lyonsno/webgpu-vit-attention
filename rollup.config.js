@@ -106,25 +106,4 @@ const samples = sampleFiles
     };
   });
 
-export default [
-  {
-    input: 'src/main.ts',
-    output: [
-      {
-        file: `${outPath}/main.js`,
-        format: 'esm',
-        sourcemap: true,
-      },
-    ],
-    plugins: [
-      nodeResolve(),
-      commonjs(),
-      filenamePlugin(),
-      typescript({ tsconfig: './src/tsconfig.json' }),
-    ],
-    watch: {
-      clearScreen: false,
-    },
-  },
-  ...samples,
-];
+export default [...samples];
